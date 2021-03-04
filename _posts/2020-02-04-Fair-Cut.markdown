@@ -1,0 +1,68 @@
+---
+layout: post
+title: Fair Cut (Hackerrank)
+date: 2021-03-04 
+description: Dynamic Programming Solution to Fair Cut on Hackerrank.
+img: HackerRank2.png # Add image post (optional)
+fig-caption: # Add figcaption (optional)
+tags: [dp,Dynamic-Programming,Hackerrank]
+---
+# Problem Statement
+
+Problem Link: [Fair Check](https://www.hackerrank.com/challenges/fair-cut/problem)
+
+# Approach
+
+
+So we have to minimise the sum of  absolute differences between all the possible pairs of elements between the selected set and not selected set.
+
+
+The thing to note is that the order of selection of elements doesn't have a effect on the final outcome of the problem.Also every element can be given two choices at any point of time.It can be either included in the selected set or it may not be included.In case it is included it will have a contribution of +a[i] for each of not selected element b[j] such that b[j]>a[i] and a contribution of -a[i] for the smaller ones.
+
+
+To simplify the complexity, we can sort the array since order doesn't matter and it will make it easier to keep track of selected elements.
+Now we can walk through the code for the problem and see the further approach.
+
+## Warning : 
+The given prototype in the hackerrank feed leads to overflow in C++. Change the return types and final answer to long long for AC.
+
+# CODE :
+``` cpp
+long long int fairCut(long long int k, vector<long long int> arr) {
+   long long int n=arr.size();
+   sort(arr.begin(),arr.end());
+   vector<vector<long long int>> dp(n+1,vector<long long int>(k+1,1e18));
+   dp[0][0]=0;
+   for(long long int i=1;i<=n;i++)
+   {
+       for(long long int j=0;j<=min(i,k);j++)
+       {
+           
+           dp[i][j]=min(dp[i-1][j]+j*arr[i-1]-(k-j)*arr[i-1],(j>0?dp[i-1][j-1]+(i-j)*arr[i-1]-(n-k-i+j)*arr[i-1]:(long long)1e18));
+       }
+   }
+ return dp[n][k];
+
+}
+```
+## Space Optimized Code:
+``` cpp
+long long int fairCut(long long int k, vector<long long int> arr) {
+   long long int n=arr.size();
+   sort(arr.begin(),arr.end());
+   vector<vector<long long int>> dp(n+1,vector<long long int>(k+1,1e18));
+   dp[0][0]=0;
+
+   for(long long int i=1;i<=n;i++)
+   {
+       for(long long int j=0;j<=min(i,k);j++)
+       {
+           
+           dp[i%2][j]=min(dp[(i+1)%2][j]+j*arr[i-1]-(k-j)*arr[i-1],(j>0?dp[(i+1)%2][j-1]+(i-j)*arr[i-1]-(n-k-i+j)*arr[i-1]:(long long)1e18));
+       }
+   }
+ return dp[n%2][k];
+
+}
+```
+
