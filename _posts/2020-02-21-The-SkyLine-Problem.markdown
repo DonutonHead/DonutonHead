@@ -1,9 +1,9 @@
 ---
 layout: post
-title: The Skyline Problem (LeetCode 238);
+title: The Skyline Problem (LeetCode 238)
 date: 2021-03-21 
 description:  Constructive Solution to The Skyline Problem.
-img: LeetCode.png # Add image post (optional)
+img: LeetCode.jpg # Add image post (optional)
 fig-caption: # Add figcaption (optional)
 tags: [dp,Dynamic-Programming,LeetCode,Constructive]
 ---
@@ -19,7 +19,7 @@ But Since the values of cooridinates range from 0 to 1e9, the normal approach mi
 
 
 ## Solution 1: 
-### prerequisite:
+### Prerequisite:
 [Coordinate Compression](https://codeforces.com/blog/entry/23180)
 
 Coordinate Compression technique is as simple as it sounds.Although the range of endpoints is large, the number of values in the range remain limited. So we map the values to a specific value in a one-one mapping.
