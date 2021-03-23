@@ -17,7 +17,7 @@ social-linkedin: # add your Linkedin handle
 social-email: donutheadlikestoCode@gmail.com
 
 # Disqus
-discus-identifier:  # add your discus identifier
+discus-identifier: donuthead  # add your discus identifier
 
 # Tracker
 analytics: # Google Analytics
